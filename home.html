@@ -4,61 +4,184 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pen to Paycheck - Home</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #333; }
-    header { background: #4A90E2; padding: 10px 20px; color: white; }
-    nav { background: #353535; padding: 10px 20px; }
-    nav a { color: white; text-decoration: none; padding: 10px 15px; display: inline-block; }
-    nav a:hover { background: #2D2D2D; }
-    .container { padding: 20px; }
-    .writing-feed { height: 500px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; }
-    .writing-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-    .writing-item:last-child { border-bottom: none; }
-    .button { padding: 8px 12px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; margin-top: 10px; }
-    .button:hover { background: #0056b3; }
-    footer { background: #4A90E2; color: white; text-align: center; padding: 10px 20px; }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f9f9f9;
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #4A90E2;
+        padding: 10px 20px;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .logo a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    .search-icon {
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .container {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .writing-feed {
+        max-width: 800px;
+        margin: 20px auto;
+        overflow-y: auto;
+        padding: 10px;
+    }
+
+    .writing-item {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    .writing-item:last-child {
+        border-bottom: none;
+    }
+
+    .button {
+        padding: 8px 12px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    .button:hover {
+        background: #0056b3;
+    }
+
+    .feed-title {
+        font-size: 24px;
+        margin-top: 20px;
+        color: #333;
+    }
+
+    footer {
+        background: #4A90E2;
+        color: white;
+        text-align: center;
+        padding: 10px 20px;
+    }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Pen to Paycheck</h1>
+    <div class="logo"><a href="home.html">Pen to Paycheck</a></div>
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="submit.html">Submit Your Writing</a>
+        <a href="#peer-review">Peer Review</a>
+        <a href="#resources">Resources</a>
+    </nav>
+    <div class="search-icon">
+        <i class="fas fa-search"></i>
+    </div>
 </header>
 
-<nav>
-    <a href="submit.html">Your Writing</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#peer-review">Peer Review</a>
-    <a href="#resources">Resources</a>
-</nav>
-
 <div class="container">
+    <h2 class="feed-title">Today's Feeds</h2>
     <div class="writing-feed">
-        <!-- Writing Feed Item -->
+        <!-- Writing Feed Item 1 -->
         <div class="writing-item">
-            <h3>Exploring Character Development</h3>
-            <p>By Jane Doe, an emerging novelist with a focus on character-driven narratives in the realm of fantasy fiction.</p>
+            <h3>Sunrise in the Valley (Poem)</h3>
+            <p>"Amidst the whispers of the early dawn, where shadows play on the mountain's lawn..."</p>
             <button class="button">Read More</button>
             <button class="button">Friend Request</button>
         </div>
-        <!-- Portfolio Item -->
+        <!-- Portfolio Item 1 -->
         <div class="writing-item">
-            <h3>Jane Doe's Portfolio</h3>
-            <p>Features several short stories and a novel-in-progress, showcasing a unique blend of magical realism and gothic elements.</p>
+            <h3>Alex Morgan's Portfolio</h3>
+            <p>Specializes in documentary journalism, featuring deep dives into cultural phenomena and social justice issues.</p>
             <button class="button">View Portfolio</button>
             <button class="button">Friend Request</button>
         </div>
-        <!-- Writing Feed Item -->
+        <!-- Writing Feed Item 2 -->
         <div class="writing-item">
-            <h3>The Influence of Modernist Poetry</h3>
-            <p>By John Smith, a poet and essayist exploring the intersections between modernist poets and contemporary urban narratives.</p>
+            <h3>Chronicles of the Forgotten (Fiction)</h3>
+            <p>"Lost within the pages of time, the forgotten tales of the ancients stir once more in the heart of the citadel..."</p>
             <button class="button">Read More</button>
             <button class="button">Friend Request</button>
         </div>
-        <!-- Portfolio Item -->
+        <!-- Portfolio Item 2 -->
         <div class="writing-item">
-            <h3>John Smith's Portfolio</h3>
-            <p>Includes a compilation of poems and essays that delve deep into the heart of city life through a poetic lens.</p>
+            <h3>Sarah Lee's Portfolio</h3>
+            <p>Features a collection of short stories and essays exploring themes of identity, exile, and belonging.</p>
+            <button class="button">View Portfolio</button>
+            <button class="button">Friend Request</button>
+        </div>
+        <!-- Writing Feed Item 3 -->
+        <div class="writing-item">
+            <h3>The Edge of Reality (Journal Entry)</h3>
+            <p>"Today, as I walked through the city, I felt the lines between reality and the otherworld blur..."</p>
+            <button class="button">Read More</button>
+            <button class="button">Friend Request</button>
+        </div>
+        <!-- Portfolio Item 3 -->
+        <div class="writing-item">
+            <h3>Michael Chen's Portfolio</h3>
+            <p>An illustrator and writer specializing in graphic novels, blending fantastical elements with modern-day settings.</p>
+            <button class="button">View Portfolio</button>
+            <button class="button">Friend Request</button>
+        </div>
+        <!-- Portfolio Item 4 -->
+        <div class="writing-item">
+            <h3>Emma Thompson's Portfolio</h3>
+            <p>A poet and critic, Emma provides a sharp look into contemporary poetry, with a focus on feminist and ecological themes.</p>
+            <button class="button">View Portfolio</button>
+            <button class="button">Friend Request</button>
+        </div>
+        <!-- Writing Feed Item 4 -->
+        <div class="writing-item">
+            <h3>Glimpses of the Past (Historical Fiction)</h3>
+            <p>"Echoes of laughter and cries of despair mingle in the halls of the great castle, as history's veil thin..."</p>
+            <button class="button">Read More</button>
+            <button class="button">Friend Request</button>
+        </div>
+        <!-- Portfolio Item 5 -->
+        <div the="writing-item">
+            <h3>Richard Baker's Portfolio</h3>
+            <p>Known for his meticulous research and vivid storytelling in historical fiction, exploring forgotten epochs and figures.</p>
             <button class="button">View Portfolio</button>
             <button class="button">Friend Request</button>
         </div>
