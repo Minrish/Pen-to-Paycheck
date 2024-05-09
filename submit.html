@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pen to Paycheck - Submit Writing for Feedback</title>
+<style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .container { background: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+    h2, h3 { color: #333; }
+    .button { padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .button:hover { background: #0056b3; }
+    input[type=text], textarea, select { width: 100%; padding: 8px; margin: 5px 0 15px; display: inline-block; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    .tag { padding: 5px 10px; background: #ddd; border-radius: 999px; display: inline-block; margin-right: 5px; cursor: pointer; }
+    .tag:hover { background: #ccc; }
+    .form-control { margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Submit Writing for Feedback</h2>
+    <div class="form-control">
+        <label for="workTitle">Work Title:</label>
+        <input type="text" id="workTitle" name="workTitle" placeholder="Enter work title">
+    </div>
+    <div class="form-control">
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="6" placeholder="Type here or upload a file below"></textarea>
+        <input type="file">
+    </div>
+    <div class="form-control">
+        <h3>Writing Style Tags:</h3>
+        <span class="tag">Poem</span><span class="tag">Essay</span><span class="tag">Journalism</span><span class="tag">Fiction</span><span class="tag">Non-Fiction</span>
+        <button class="button" style="margin-top: 10px;">+</button>
+    </div>
+    <div class="form-control">
+        <label for="feedbackScope">Who can leave feedback:</label>
+        <select id="feedbackScope" name="feedbackScope">
+            <option value="friends">Friends</option>
+            <option value="everyone">Everyone</option>
+        </select>
+    </div>
+    <div class="form-control">
+        <h3>Feedback Tags:</h3>
+        <span class="tag">Grammar</span><span class="tag">Pacing</span><span class="tag">Character Development</span><span class="tag">Plot Structure</span>
+        <button class="button" style="margin-top: 10px;">+</button>
+    </div>
+    <div class="form-control">
+        <label for="feedbackRequest">Write feedback prompt here:</label>
+        <input type="text" id="feedbackRequest" name="feedbackRequest" placeholder="E.g., What is your interpretation of this poem?">
+        <button class="button">Add Question/Request Here</button>
+    </div>
+</div>
+
+</body>
+</html>
