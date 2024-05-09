@@ -6,12 +6,18 @@
 <title>Pen to Paycheck - Submit Writing for Feedback</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f9f9f9; }
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f9f9f9;
+    }
     header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #4A90E2;
+        background: linear-gradient(to right, #4A90E2, #4A60E2);
+        border-radius: 50px;
         padding: 10px 20px;
         color: white;
         position: sticky;
@@ -41,33 +47,42 @@
         font-size: 20px;
         cursor: pointer;
     }
-    .container { 
-        background: #ffffff; 
-        padding: 20px; 
-        border-radius: 8px; 
-        margin: 20px auto; 
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+    .container {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 20px auto;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         max-width: 800px;
     }
-    h2, h3 { color: #333; }
-    .button { 
-        padding: 10px 20px; 
-        background: #007BFF; 
-        color: white; 
-        border: none; 
-        border-radius: 5px; 
-        cursor: pointer; 
+    h2 {
+        color: #333;
     }
-    .button:hover { 
-        background: #0056b3; 
+    h3, label.heading {
+        color: #333;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }  
+    .button {
+        padding: 10px 20px;
+        background: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
     }
-    input[type=text], textarea, select { 
-        width: 100%; 
-        padding: 8px; 
-        margin: 5px 0 15px; 
-        border: 1px solid #ccc; 
-        border-radius: 4px; 
-        box-sizing: border-box; 
+    .button:hover {
+        background: #0056b3;
+    }
+    input[type=text], textarea, select {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
     }
     .tag { 
         padding: 5px 10px; 
@@ -77,11 +92,61 @@
         border-radius: 999px; 
         color: white; 
     }
-    .tag:hover { 
-        opacity: 0.9; 
+    .tag:hover {
+        opacity: 0.9;
     }
-    .form-control { 
-        margin-bottom: 10px; 
+    .form-control {
+        margin-bottom: 10px;
+    }
+
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+    }
+    .close {
+        float: right;
+        font-size: 28px;
+        cursor: pointer;
+    }
+    .plus-sign {
+        display: inline-block;
+        background: linear-gradient(to right, cyan, lightgreen);
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+    }
+    .delete-sign {
+        display: inline-block;
+        background: linear-gradient(to right, red, darkred);
+        border-radius: 50%;
+        padding: 5px;
+        cursor: pointer;
+    }
+    .container-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    .submission-preview, .submitted-writings {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        width: 30%;
     }
     /* Gradients for tags */
     .poem { background: linear-gradient(to right, #8e9eab, #eef2f3); }
@@ -95,6 +160,22 @@
     .plot { background: linear-gradient(to right, #fad0c4, #ffd1ff); }
     .syntax { background: linear-gradient(to right, #f6d365, #fda085); }
 </style>
+<script>
+    function toggleModal() {
+        const modal = document.getElementById('tagModal');
+        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    }
+    
+    function addTag() {
+        const tagInput = document.getElementById('newTag').value;
+        const newTag = document.createElement('span');
+        newTag.textContent = tagInput;
+        newTag.classList.add('tag');
+        // Random gradient color logic here
+        document.querySelector('.tags-container').appendChild(newTag);
+        toggleModal();
+    }
+    </script>
 </head>
 <body>
 
@@ -112,46 +193,69 @@
     </div>
 </header>
 
-<div class="container">
-    <h2>Submit Writing for Feedback</h2>
-    <div class="form-control">
-        <label for="workTitle">Work Title:</label>
-        <input type="text" id="workTitle" name="workTitle" placeholder="Enter work title">
+
+<div class="container-flex">
+    <div class="submitted-writings">
+        <h3>Submitted Writings</h3>
+        <!-- Dynamically populated writings here -->
     </div>
-    <div class="form-control">
-        <label for="content">Content:</label>
-        <textarea id="content" name="content" rows="6" placeholder="Type here or upload a file below"></textarea>
-        <input type="file">
+
+    <div class="container">
+        <!-- Form content here -->
+        <h2>Submit Writing for Feedback</h2>
+        <div class="form-control">
+            <label for="workTitle" class="heading">Work Title:</label>
+            <input type="text" id="workTitle" name="workTitle" placeholder="Enter work title">
+        </div>
+        <div class="form-control">
+            <label for="content" class="heading">Content:</label>
+            <textarea id="content" name="content" rows="6" placeholder="Type here or upload a file below"></textarea>
+            <input type="file">
+        </div>
+        <div class="form-control">
+            <h3>Writing Style Tags:</h3>
+            <span class="tag poem">Poem</span>
+            <span class="tag essay">Essay</span>
+            <span class="tag journalism">Journalism</span>
+            <span class="tag fiction">Fiction</span>
+            <span class="tag non-fiction">Non-Fiction</span>
+            <button class="button" style="margin-top: 10px;">+</button>
+        </div>
+        <div class="form-control">
+            <label for="feedbackScope" class="heading">Who can leave feedback:</label>
+            <select id="feedbackScope" name="feedbackScope">
+                <option value="friends">Friends</option>
+                <option value="everyone">Everyone</option>
+            </select>
+        </div>
+        <div class="form-control">
+            <h3>Feedback Tags:</h3>
+            <span class="tag grammar">Grammar</span>
+            <span class="tag pacing">Pacing</span>
+            <span class="tag character">Character Development</span>
+            <span class="tag plot">Plot Structure</span>
+            <span class="tag syntax">Syntax</span>
+            <button class="button" style="margin-top: 10px;">+</button>
+        </div>
+        <div class="form-control">
+            <label for="feedbackRequest" class="heading">Write feedback prompt here:</label>
+            <input type="text" id="feedbackRequest" name="feedbackRequest" placeholder="E.g., What is your interpretation of this poem?">
+            <button class="button">Add Question/Request Here</button>
+        </div>
     </div>
-    <div class="form-control">
-        <h3>Writing Style Tags:</h3>
-        <span class="tag poem">Poem</span>
-        <span class="tag essay">Essay</span>
-        <span class="tag journalism">Journalism</span>
-        <span class="tag fiction">Fiction</span>
-        <span class="tag non-fiction">Non-Fiction</span>
-        <button class="button" style="margin-top: 10px;">+</button>
+
+    <div class="submission-preview">
+        <h3>Submission Preview</h3>
+        <!-- Dynamically updated preview content here -->
     </div>
-    <div class="form-control">
-        <label for="feedbackScope">Who can leave feedback:</label>
-        <select id="feedbackScope" name="feedbackScope">
-            <option value="friends">Friends</option>
-            <option value="everyone">Everyone</option>
-        </select>
-    </div>
-    <div class="form-control">
-        <h3>Feedback Tags:</h3>
-        <span class="tag grammar">Grammar</span>
-        <span class="tag pacing">Pacing</span>
-        <span class="tag character">Character Development</span>
-        <span class="tag plot">Plot Structure</span>
-        <span class="tag syntax">Syntax</span>
-        <button class="button" style="margin-top: 10px;">+</button>
-    </div>
-    <div class="form-control">
-        <label for="feedbackRequest">Write feedback prompt here:</label>
-        <input type="text" id="feedbackRequest" name="feedbackRequest" placeholder="E.g., What is your interpretation of this poem?">
-        <button class="button">Add Question/Request Here</button>
+</div>
+
+<div id="tagModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleModal()">&times;</span>
+        <h4>New Tag</h4>
+        <input type="text" id="newTag">
+        <button onclick="addTag()">Add Tag</button>
     </div>
 </div>
 

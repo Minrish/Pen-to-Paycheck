@@ -17,7 +17,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #4A90E2;
+        background: linear-gradient(to right, #4A90E2, #4A60E2);
+        border-radius: 50px;
         padding: 10px 20px;
         color: white;
         position: sticky;
@@ -54,25 +55,37 @@
     }
 
     .container {
-        margin-top: 20px;
         width: 100%;
+        margin-top: 20px;
+    }
+
+    .feed-title {
+        font-size: 24px;
+        margin: 20px auto;
+        color: #333;
+        width: 800px;
     }
 
     .writing-feed {
         max-width: 800px;
-        margin: 20px auto;
+        margin: auto;
         overflow-y: auto;
-        padding: 10px;
     }
 
     .writing-item {
+        background: linear-gradient(to right, #eef2f3, #8e9eab);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 20px;
         margin-bottom: 20px;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
     }
 
-    .writing-item:last-child {
-        border-bottom: none;
+    .portfolio-item {
+        background: linear-gradient(to right, #ffecd2, #fcb69f);
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 20px;
     }
 
     .button {
@@ -89,17 +102,17 @@
         background: #0056b3;
     }
 
-    .feed-title {
-        font-size: 24px;
-        margin-top: 20px;
-        color: #333;
-    }
-
     footer {
-        background: #4A90E2;
-        color: white;
-        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, #4A90E2, #4A60E2);
+        border-radius: 50px;
         padding: 10px 20px;
+        color: white;
+        top: 0;
+        z-index: 1000;
     }
 </style>
 </head>
@@ -121,6 +134,7 @@
 
 <div class="container">
     <h2 class="feed-title">Today's Feeds</h2>
+
     <div class="writing-feed">
         <!-- Writing Feed Item 1 -->
         <div class="writing-item">
@@ -130,7 +144,7 @@
             <button class="button">Friend Request</button>
         </div>
         <!-- Portfolio Item 1 -->
-        <div class="writing-item">
+        <div class="portfolio-item">
             <h3>Alex Morgan's Portfolio</h3>
             <p>Specializes in documentary journalism, featuring deep dives into cultural phenomena and social justice issues.</p>
             <button class="button">View Portfolio</button>
@@ -144,7 +158,7 @@
             <button class="button">Friend Request</button>
         </div>
         <!-- Portfolio Item 2 -->
-        <div class="writing-item">
+        <div class="portfolio-item">
             <h3>Sarah Lee's Portfolio</h3>
             <p>Features a collection of short stories and essays exploring themes of identity, exile, and belonging.</p>
             <button class="button">View Portfolio</button>
@@ -158,14 +172,14 @@
             <button class="button">Friend Request</button>
         </div>
         <!-- Portfolio Item 3 -->
-        <div class="writing-item">
+        <div class="portfolio-item">
             <h3>Michael Chen's Portfolio</h3>
             <p>An illustrator and writer specializing in graphic novels, blending fantastical elements with modern-day settings.</p>
             <button class="button">View Portfolio</button>
             <button class="button">Friend Request</button>
         </div>
         <!-- Portfolio Item 4 -->
-        <div class="writing-item">
+        <div class="portfolio-item">
             <h3>Emma Thompson's Portfolio</h3>
             <p>A poet and critic, Emma provides a sharp look into contemporary poetry, with a focus on feminist and ecological themes.</p>
             <button class="button">View Portfolio</button>
@@ -179,7 +193,7 @@
             <button class="button">Friend Request</button>
         </div>
         <!-- Portfolio Item 5 -->
-        <div the="writing-item">
+        <div class="portfolio-item">
             <h3>Richard Baker's Portfolio</h3>
             <p>Known for his meticulous research and vivid storytelling in historical fiction, exploring forgotten epochs and figures.</p>
             <button class="button">View Portfolio</button>
