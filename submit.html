@@ -128,13 +128,14 @@
     }
 
     .delete-sign {
-        display: inline-block;
+        /* display: inline-block; */
         background: linear-gradient(to right, rgb(231, 137, 137), red);
         padding: 5px 11px;
         margin-right: 5px;
         cursor: pointer;
         border-radius: 999px;
         color: white;
+        float: right; /* Align delete sign to the right */
     }
 
     .container-flex {
@@ -192,6 +193,14 @@
     .character { background: linear-gradient(to right, #ff758c, #ff7eb3); }
     .plot { background: linear-gradient(to right, #fad0c4, #ffd1ff); }
     .syntax { background: linear-gradient(to right, #f6d365, #fda085); }
+
+    .tag.selected {
+    border: 2px solid red; /* Highlight selected tags */
+    }
+
+    .new-tag {
+        margin-top: 200px; /* Spacer for new tags */
+    }
 </style>
 
 <script>
@@ -212,17 +221,30 @@ function addTag() {
     toggleModal();
 }
 
-// Function to update tags in the preview dynamically
 function updateTags(tag) {
-    const previewTags = document.getElementById('previewTags');
-    // Check if the tag is already in the preview
-    if (!previewTags.textContent.includes(tag.textContent)) {
-        // Create a clone of the tag to append to the preview
-        const tagClone = tag.cloneNode(true);
-        tagClone.onclick = null; // Remove the onclick event from the clone
-        previewTags.appendChild(tagClone);
-        previewTags.appendChild(document.createTextNode(" ")); // Add space between tags
+    if (tag.classList.contains('selected')) {
+        tag.classList.remove('selected');
+        document.getElementById('previewTags').removeChild(tag);
+    } else {
+        const previewTags = document.getElementById('previewTags');
+        if (!previewTags.innerHTML.includes(tag.textContent)) {
+            const tagClone = tag.cloneNode(true);
+            tagClone.onclick = () => updateTags(tagClone);
+            tagClone.classList.add('selected');
+            previewTags.appendChild(tagClone);
+            previewTags.appendChild(document.createTextNode(" ")); // Spacer
+        }
     }
+}
+
+function createNewTag() {
+    const input = document.getElementById('newTagInput').value;
+    const newTag = document.createElement('span');
+    newTag.textContent = input;
+    newTag.className = 'tag new-tag';
+    newTag.onclick = () => updateTags(newTag);
+    document.querySelector('.tags-container').appendChild(document.createTextNode(" ")); // Spacer for new tags
+    document.querySelector('.tags-container').appendChild(newTag);
 }
 
 function updatePreview() {
