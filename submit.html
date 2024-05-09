@@ -55,16 +55,13 @@
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         max-width: 800px;
     }
-    h2 {
-        color: #333;
-    }
-    h3, label.heading {
+    h2, h3, label.heading {
         color: #333;
         font-size: 18px;
         font-weight: bold;
         margin-top: 20px;
         margin-bottom: 10px;
-    }  
+    }
     .button {
         padding: 10px 20px;
         background: #007BFF;
@@ -84,13 +81,13 @@
         border-radius: 4px;
         box-sizing: border-box;
     }
-    .tag { 
-        padding: 5px 10px; 
-        margin-right: 5px; 
-        cursor: pointer; 
-        display: inline-block; 
-        border-radius: 999px; 
-        color: white; 
+    .tag {
+        padding: 5px 10px;
+        margin-right: 5px;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 999px;
+        color: white;
     }
     .tag:hover {
         opacity: 0.9;
@@ -98,8 +95,6 @@
     .form-control {
         margin-bottom: 10px;
     }
-
-
     .modal {
         position: fixed;
         top: 0;
@@ -125,21 +120,28 @@
     .plus-sign {
         display: inline-block;
         background: linear-gradient(to right, cyan, lightgreen);
-        border-radius: 50%;
-        padding: 5px;
+        padding: 5px 10px;
+        margin-right: 5px;
         cursor: pointer;
+        border-radius: 999px;
+        color: white;
     }
+
     .delete-sign {
         display: inline-block;
-        background: linear-gradient(to right, red, darkred);
-        border-radius: 50%;
-        padding: 5px;
+        background: linear-gradient(to right, rgb(231, 137, 137), red);
+        padding: 5px 11px;
+        margin-right: 5px;
         cursor: pointer;
+        border-radius: 999px;
+        color: white;
     }
+
     .container-flex {
         display: flex;
         justify-content: space-between;
     }
+
     .submission-preview, .submitted-writings {
         background: #ffffff;
         padding: 20px;
@@ -147,6 +149,37 @@
         margin: 20px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         width: 30%;
+    }
+
+    /* Additional styles for modal windows */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+    }
+    
+    .close {
+        float: right;
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    /* Styles for dynamically updating the content */
+    .dynamic-content {
+        margin-bottom: 10px;
     }
     /* Gradients for tags */
     .poem { background: linear-gradient(to right, #8e9eab, #eef2f3); }
@@ -160,22 +193,57 @@
     .plot { background: linear-gradient(to right, #fad0c4, #ffd1ff); }
     .syntax { background: linear-gradient(to right, #f6d365, #fda085); }
 </style>
+
 <script>
-    function toggleModal() {
-        const modal = document.getElementById('tagModal');
-        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+function toggleModal(section) {
+    const modal = document.getElementById('tagModal');
+    modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    modal.dataset.section = section; // Keep track of which section opened the modal
+}
+
+function addTag() {
+    const tagInput = document.getElementById('newTag').value;
+    const section = document.getElementById('tagModal').dataset.section;
+    const newTag = document.createElement('span');
+    newTag.textContent = tagInput;
+    newTag.classList.add('tag');
+    newTag.style.background = section === 'writing' ? 'linear-gradient(to right, #8e9eab, #eef2f3)' : 'linear-gradient(to right, #ffecd2, #fcb69f)';
+    document.querySelector(`.${section}-tags`).appendChild(newTag);
+    toggleModal();
+}
+
+// Function to update tags in the preview dynamically
+function updateTags(tag) {
+    const previewTags = document.getElementById('previewTags');
+    // Check if the tag is already in the preview
+    if (!previewTags.textContent.includes(tag.textContent)) {
+        // Create a clone of the tag to append to the preview
+        const tagClone = tag.cloneNode(true);
+        tagClone.onclick = null; // Remove the onclick event from the clone
+        previewTags.appendChild(tagClone);
+        previewTags.appendChild(document.createTextNode(" ")); // Add space between tags
     }
-    
-    function addTag() {
-        const tagInput = document.getElementById('newTag').value;
-        const newTag = document.createElement('span');
-        newTag.textContent = tagInput;
-        newTag.classList.add('tag');
-        // Random gradient color logic here
-        document.querySelector('.tags-container').appendChild(newTag);
-        toggleModal();
+}
+
+function updatePreview() {
+    const title = document.getElementById('workTitle').value;
+    const content = document.getElementById('content').value;
+    document.getElementById('previewTitle').textContent = title;
+    document.getElementById('previewContent').textContent = content;
+}
+
+function addFeedbackPrompt() {
+    const feedbackPrompt = document.getElementById('feedbackRequest').value;
+    document.getElementById('previewFeedbackPrompt').textContent = feedbackPrompt;
+}
+
+// Function to handle deletion with confirmation
+function deleteWriting(element) {
+    if (confirm('Are you sure you want to delete this writing?')) {
+        element.parentNode.removeChild(element);
     }
-    </script>
+}
+</script>
 </head>
 <body>
 
@@ -193,64 +261,63 @@
     </div>
 </header>
 
-
 <div class="container-flex">
     <div class="submitted-writings">
         <h3>Submitted Writings</h3>
-        <!-- Dynamically populated writings here -->
+        <div id="writingList">
+            <p>Sunrise in the Valley (Poem) <span class="delete-sign" onclick="deleteWriting(this.parentNode)">-</span></p>
+            <p>Chronicles of the Forgotten (Fiction) <span class="delete-sign" onclick="deleteWriting(this.parentNode)">-</span></p>
+        </div>
     </div>
 
     <div class="container">
-        <!-- Form content here -->
         <h2>Submit Writing for Feedback</h2>
         <div class="form-control">
             <label for="workTitle" class="heading">Work Title:</label>
-            <input type="text" id="workTitle" name="workTitle" placeholder="Enter work title">
+            <input type="text" id="workTitle" name="workTitle" placeholder="Enter work title" oninput="updatePreview()">
         </div>
         <div class="form-control">
             <label for="content" class="heading">Content:</label>
-            <textarea id="content" name="content" rows="6" placeholder="Type here or upload a file below"></textarea>
+            <textarea id="content" name="content" rows="15" placeholder="Type here or upload a file below" oninput="updatePreview()"></textarea>
             <input type="file">
         </div>
-        <div class="form-control">
+        <div class="form-control writing-tags">
             <h3>Writing Style Tags:</h3>
-            <span class="tag poem">Poem</span>
-            <span class="tag essay">Essay</span>
-            <span class="tag journalism">Journalism</span>
-            <span class="tag fiction">Fiction</span>
-            <span class="tag non-fiction">Non-Fiction</span>
-            <button class="button" style="margin-top: 10px;">+</button>
+            <div class="tags-container">
+                <span class="tag poem"onclick="updateTags(this)">Poem</span>
+                <span class="tag essay"onclick="updateTags(this)">Essay</span>
+                <span class="tag journalism"onclick="updateTags(this)">Journalism</span>
+                <span class="tag fiction"onclick="updateTags(this)">Fiction</span>
+                <span class="tag non-fiction"onclick="updateTags(this)">Non-Fiction</span>
+                <span class="plus-sign" onclick="toggleModal('writing')">+</span>
+            </div>
         </div>
-        <div class="form-control">
-            <label for="feedbackScope" class="heading">Who can leave feedback:</label>
-            <select id="feedbackScope" name="feedbackScope">
-                <option value="friends">Friends</option>
-                <option value="everyone">Everyone</option>
-            </select>
-        </div>
-        <div class="form-control">
+        <div class="form-control feedback-tags">
             <h3>Feedback Tags:</h3>
-            <span class="tag grammar">Grammar</span>
-            <span class="tag pacing">Pacing</span>
-            <span class="tag character">Character Development</span>
-            <span class="tag plot">Plot Structure</span>
-            <span class="tag syntax">Syntax</span>
-            <button class="button" style="margin-top: 10px;">+</button>
+            <span class="tag grammar" onclick="updateTags(this)">Grammar</span>
+            <span class="tag pacing" onclick="updateTags(this)">Pacing</span>
+            <span class="tag character" onclick="updateTags(this)">Character Development</span>
+            <span class="tag plot" onclick="updateTags(this)">Plot Structure</span>
+            <span class="tag syntax" onclick="updateTags(this)">Syntax</span>
+            <span class="plus-sign" onclick="toggleModal('feedback')">+</span>
         </div>
         <div class="form-control">
             <label for="feedbackRequest" class="heading">Write feedback prompt here:</label>
-            <input type="text" id="feedbackRequest" name="feedbackRequest" placeholder="E.g., What is your interpretation of this poem?">
-            <button class="button">Add Question/Request Here</button>
+            <input type="text" id="feedbackRequest" name="feedbackRequest" placeholder="E.g., What is your interpretation of this poem?" oninput="updatePreview()">
+            <button class="button" onclick="addFeedbackPrompt()">Add Question/Request Here</button>
         </div>
     </div>
 
     <div class="submission-preview">
         <h3>Submission Preview</h3>
-        <!-- Dynamically updated preview content here -->
+        <p><strong>Title:</strong> <span id="previewTitle"></span></p>
+        <p><strong>Content:</strong> <span id="previewContent"></span></p>
+        <p><strong>Tags:</strong> <span id="previewTags"></span></p>
+        <p><strong>Feedback Prompt:</strong> <span id="previewFeedbackPrompt"></span></p>
     </div>
 </div>
 
-<div id="tagModal" class="modal">
+<div id="tagModal" class="modal" style="display: none;">
     <div class="modal-content">
         <span class="close" onclick="toggleModal()">&times;</span>
         <h4>New Tag</h4>
@@ -259,5 +326,34 @@
     </div>
 </div>
 
+<script>
+    // JavaScript to handle tag addition and real-time preview updates
+    function addTag() {
+        const tagInput = document.getElementById('newTag').value;
+        const section = document.getElementById('tagModal').dataset.section;
+        const newTag = document.createElement('span');
+        newTag.className = 'tag';
+        newTag.textContent = tagInput;
+        // Apply gradient based on the section
+        newTag.style.background = section === 'writing' ? 'linear-gradient(to right, #8e9eab, #eef2f3)' : 'linear-gradient(to right, #ffecd2, #fcb69f)';
+        document.querySelector(`.${section}-tags`).appendChild(newTag);
+        toggleModal();
+    }
+
+    function toggleModal(section) {
+        const modal = document.getElementById('tagModal');
+        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        modal.dataset.section = section;
+    }
+
+    function updatePreview() {
+        const title = document.getElementById('workTitle').value;
+        const content = document.getElementById('content').value;
+        document.getElementById('previewTitle').textContent = title;
+        document.getElementById('previewContent').textContent = content;
+    }
+</script>
+
 </body>
 </html>
+
