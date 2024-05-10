@@ -98,7 +98,14 @@ footer {
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     max-width: 800px;
 }
-h2, h3, label.heading {
+h2 {
+    color: #656565;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h3, label.heading {
     color: #333;
     font-size: 18px;
     font-weight: bold;
@@ -267,4 +274,27 @@ input[type=text], textarea, select {
     line-height: 1.6;
     color: #E6E6E6; /* Light silver color for the font */
     background: linear-gradient(to right, #0F2027, #203A43, #2C5364); /* Gradient from deep space blue to cosmic purple */
+}
+
+/* Toggle animation */
+@keyframes fadeEffect {
+    from {opacity: 0.5;}
+    to {opacity: 1;}
+}
+
+.highlight {
+    background-color: yellow; /* Highlight color for selected text */
+    animation: fadeEffect 0.3s;
+}
+
+.comment-box, .comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f8f8f8;
+    position: absolute;
+    z-index: 1000; /* Ensure it's on top */
+    border: 1px solid black; /* Make it visible */
+    display: block;
+    background: #f1f1f1;
+    margin-top: 5px;
 }

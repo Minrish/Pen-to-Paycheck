@@ -72,3 +72,67 @@ function deleteWriting(element) {
         element.parentNode.removeChild(element);
     }
 }
+
+// In-line highlight and comment
+function checkSelection(event) {
+    const selection = window.getSelection();
+    if (!selection.isCollapsed) { // Check if there is an actual selection
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+        showCommentBox(rect.top + window.scrollY, rect.left, range);
+    }
+}
+
+function addComment() {
+    const commentBox = document.getElementById('commentBox');
+    const commentText = document.getElementById('commentInput').value;
+    const selection = window.getSelection();
+    if (!commentText.trim() || selection.rangeCount === 0) return;
+
+    const range = selection.getRangeAt(0);
+    const span = document.createElement('span');
+    span.className = 'highlight';
+    span.textContent = selection.toString();
+    span.style.backgroundColor = 'yellow';  // Ensuring the highlight color
+
+    const comment = document.createElement('div');
+    comment.className = 'comment';
+    comment.textContent = commentText;
+
+    range.deleteContents();
+    range.insertNode(span);
+    document.getElementById('commentsDisplay').appendChild(comment); // Append comment to a dedicated display area
+
+    commentBox.remove();  // Remove the comment box after adding
+    selection.removeAllRanges(); // Clear selection
+}
+
+// Function to show comment box
+function showCommentBox(top, left, range) {
+    const commentBox = document.createElement('div');
+    commentBox.id = 'commentBox';
+    commentBox.className = 'comment-box';
+    commentBox.style.position = 'absolute';
+    commentBox.style.top = (top + window.scrollY) + 'px';
+    commentBox.style.left = left + 'px';
+    commentBox.innerHTML = `
+        <textarea id='commentInput' rows='4' placeholder='Enter your comment'></textarea>
+        <button onclick='addComment()'>Add Comment</button>
+    `;
+    document.body.appendChild(commentBox);
+}
+
+function toggleComments() {
+    const comments = document.querySelectorAll('.highlight, .comment');
+    comments.forEach(comment => {
+        if (comment.style.display === 'none') {
+            comment.style.display = '';
+        } else {
+            comment.style.display = 'none';
+        }
+    });
+
+    // Toggle button appearance
+    const toggleBtn = document.getElementById('toggleCommentsBtn');
+    toggleBtn.textContent = toggleBtn.textContent.includes('Show') ? 'Hide Comments' : 'Show Comments';
+}

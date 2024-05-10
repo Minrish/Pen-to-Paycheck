@@ -23,74 +23,54 @@
     </div>
 </header>
 
-<div class="container">
-    <div class="writing-feedback-container">
-        <h2>Feedback on Writing</h2>
-        <div class="container">
-            <div class="writing-piece">
-                
-                <div class="poem-structure">
-                    <b>Infinity Affairs</b>
-
-                    ToyStory Buzz Lightyear bullshit
-                    across this extraterrestrial universe!
-                    I have seen so much in my time
-                    on this celestial soil, still the waters
-                    flood the cities of space-time continuums,
-                    Biblical Noah rescues some three-eyed,
-                    four-winged creature from the wrath
-                    of our merciless God. Cannonball crush
-                    on a war-torn country, Hershey kiss
-                    for corporate love affairs that human
-                    beings (and Human Resources) will call
-                    citation, censored *#%^#%@&
-                    for the respect of the privacy and public
-                    damnation welcomes the complicit. Moon
-                    -y eyed boys practice violence on foreign
-                    objects contrived from cobalt ruins
-                    of conspiracy theorists’ UFO destinies,
-                    while the children are begging to be
-                    believed. He razes villages before Empires,
-                    scatters Babel-tongued bodies across borders
-                    before they are biopsied. Spoon politicians
-                    into brine and they will emerge wrinklier
-                    and with more bite. Save the blood,
-                    they almost resemble me and you.
-                    The Kuiper Belt wears down the loops
-                    of Neptune’s orbit, and the Sea
-                    rejoices when the icy, frosted donut dissolves
-                    in volumes that burn
-                    through Venice and somewhere south
-                    of the great Caviar-Corn Crevasse,
-                    where Helios rests from that treacherous
-                    8-minute journey and the dude before Galileo
-                    rolls in his grave, along with the other fuckers
-                    affluent with despair,
-                    on God’s Grand Earth.</div>
+<div class="container-flex">
+    <div class="container">
+        <div class="writing-feedback-container">
+            <h3>Feedback on Writing</h3>
+            <button id="toggleCommentsBtn" onclick="toggleComments()" style="animation: fadeEffect 0.3s;">
+                Hide Comments
+            </button>
+            <div class="container">
+                <div id="textContainer" class="writing-piece" onclick="checkSelection()">
+                    <p><b>Infinity Affairs</b></p>
+                    <p id="line1">ToyStory Buzz Lightyear bullshit across this extraterrestrial universe!</p>
+                    <p id="line2">I have seen so much in my time on this celestial soil...</p>
+                    <!-- More lines as needed -->
+                </div>
+            </div>
+        </div>    
+    
+        <div class="container">    
+            <div class="tags-section">
+                <h3>Tags:</h3>
+                <span class="tag poem"onclick="updateTags(this)">Poem</span>
+                <h3>Feedback:</h3>
+                <span class="tag pacing" onclick="updateTags(this)">Pacing</span>
+                <span class="tag grammar" onclick="updateTags(this)">Grammar</span>
+                <!-- Add more tags as needed -->
             </div>
         </div>
-    </div>    
-
-    <div class="container">    
-        <div class="tags-section">
-            <h3>Tags:</h3>
-            <span class="tag poem"onclick="updateTags(this)">Poem</span>
-            <h3>Feedback:</h3>
-            <span class="tag pacing" onclick="updateTags(this)">Pacing</span>
-            <span class="tag grammar" onclick="updateTags(this)">Grammar</span>
-            <!-- Add more tags as needed -->
+        
+        <div class="container">  
+            <div class="overall-feedback-section">
+                <h3>Review:</h3>
+                <textarea rows="10" placeholder="Write your feedback here..."></textarea>
+                <button class="button">Submit Feedback</button>
+            </div>
         </div>
-    </div>
     
-    <div class="container">  
-        <div class="overall-feedback-section">
-            <h3>Review:</h3>
-            <textarea rows="10" placeholder="Write your feedback here..."></textarea>
-            <button class="button">Submit Feedback</button>
+    </div>
+
+    <div class="container">
+        <h3>In-line Comments</h3>
+        <h2>Select text in the writing to highlight and leave comments</h2>
+        <div id="commentsDisplay">
+            <!-- Comments will be appended here -->
         </div>
     </div>
 
 </div>
+
 
 <footer>
     &copy; 2024 Pen to Paycheck. All rights reserved.
