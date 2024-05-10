@@ -5,291 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pen to Paycheck - Submit Writing for Feedback</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: #f9f9f9;
-    }
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: linear-gradient(to right, #4A90E2, #4A60E2);
-        border-radius: 50px;
-        padding: 10px 20px;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-    .logo a {
-        color: white;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-    }
-    nav a {
-        color: white;
-        text-decoration: none;
-        padding: 10px;
-    }
-    nav a:hover {
-        text-decoration: underline;
-    }
-    .search-icon {
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-    }
-    .container {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 15px;
-        margin: 20px auto;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        max-width: 800px;
-    }
-    h2, h3, label.heading {
-        color: #333;
-        font-size: 18px;
-        font-weight: bold;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-    .button {
-        padding: 10px 20px;
-        background: #007BFF;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .button:hover {
-        background: #0056b3;
-    }
-    input[type=text], textarea, select {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0 15px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    .tag {
-        padding: 5px 10px;
-        margin-right: 5px;
-        cursor: pointer;
-        /* display: inline-block; */
-        border-radius: 999px;
-        color: white;
-        margin-bottom: 10px;
-    }
-    .tag:hover {
-        opacity: 0.9;
-    }
-    .form-control {
-        margin-bottom: 10px;
-    }
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-    }
-    .modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 300px;
-    }
-    .close {
-        float: right;
-        font-size: 28px;
-        cursor: pointer;
-    }
-    .plus-sign {
-        display: inline-block;
-        background: linear-gradient(to right, cyan, lightgreen);
-        padding: 5px 10px;
-        margin-right: 5px;
-        cursor: pointer;
-        border-radius: 999px;
-        color: white;
-    }
 
-    .delete-sign {
-        /* display: inline-block; */
-        background: linear-gradient(to right, rgb(231, 137, 137), red);
-        padding: 5px 11px;
-        margin-right: 5px;
-        cursor: pointer;
-        border-radius: 999px;
-        color: white;
-        float: right; /* Align delete sign to the right */
-    }
-
-    .container-flex {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .submission-preview, .submitted-writings {
-        background: #ffffff;
-        padding: 20px;
-        border-radius: 8px;
-        margin: 20px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        width: 30%;
-    }
-
-    /* Additional styles for modal windows */
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: none;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .modal-content {
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        width: 300px;
-    }
-    
-    .close {
-        float: right;
-        font-size: 28px;
-        cursor: pointer;
-    }
-
-    /* Styles for dynamically updating the content */
-    .dynamic-content {
-        margin-bottom: 10px;
-    }
-    /* Gradients for tags */
-    .poem { background: linear-gradient(to right, #8e9eab, #eef2f3); }
-    .essay { background: linear-gradient(to right, #89f7fe, #66a6ff); }
-    .journalism { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
-    .fiction { background: linear-gradient(to right, #cfd9df, #e2ebf0); }
-    .non-fiction { background: linear-gradient(to right, #5d9fff, #b8d3fe); }
-    .grammar { background: linear-gradient(to right, #ffecd2, #fcb69f); }
-    .pacing { background: linear-gradient(to right, #ff9a9e, #fad0c4); }
-    .character { background: linear-gradient(to right, #ff758c, #ff7eb3); }
-    .plot { background: linear-gradient(to right, #fad0c4, #ffd1ff); }
-    .syntax { background: linear-gradient(to right, #f6d365, #fda085); }
-
-    .tag.selected {
-        border: 2px solid red;
-    }
-
-    .new-tag {
-        margin-top: 10px; 
-    }
-
-    .tag-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        align-items: center;
-    }
-
-
-
-</style>
-
-<script>
-function toggleModal(section) {
-    const modal = document.getElementById('tagModal');
-    modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-    modal.dataset.section = section; // Keep track of which section opened the modal
-}
-
-function addTag() {
-    const tagInput = document.getElementById('newTag').value;
-    const section = document.getElementById('tagModal').dataset.section;
-    if (tagInput.trim() === "") return; // Prevent adding empty tags
-
-    const newTag = document.createElement('span');
-    newTag.textContent = tagInput;
-    newTag.classList.add('tag');
-    newTag.style.background = section === 'writing' ? 'linear-gradient(to right, #8e9eab, #eef2f3)' : 'linear-gradient(to right, #ffecd2, #fcb69f)';
-    newTag.onclick = function() { updateTags(newTag); }; // Assign onclick function to update the preview
-
-    const container = document.querySelector(`.${section}-tags .tag-container`);
-    container.appendChild(newTag);
-    document.getElementById('newTag').value = ''; // Clear input field
-    toggleModal(); // Close the modal
-}
-function createNewTag() {
-    const input = document.getElementById('newTagInput').value;
-    if (!input.trim()) return; // Prevent empty tags
-
-    const newTag = document.createElement('span');
-    newTag.textContent = input;
-    newTag.className = 'tag new-tag'; // Assign the appropriate classes
-    newTag.style.background = document.getElementById('tagModal').dataset.section === 'writing' ? 'linear-gradient(to right, #8e9eab, #eef2f3)' : 'linear-gradient(to right, #ffecd2, #fcb69f)';
-
-    // Attach event listener for updating the preview
-    newTag.addEventListener('click', function() {
-        updateTags(newTag);
-    });
-
-    document.querySelector('.tag-container').appendChild(newTag);
-    document.getElementById('newTagInput').value = ''; // Clear input after adding
-    toggleModal(); // Close the modal
-}
-
-// This function toggles tags in the preview when clicked
-function updateTags(tag) {
-    const previewTags = document.getElementById('previewTags');
-    let existing = Array.from(previewTags.children).some(child => child.textContent === tag.textContent);
-    if (existing) {
-        Array.from(previewTags.children).forEach(child => {
-            if (child.textContent === tag.textContent) previewTags.removeChild(child);
-        });
-    } else {
-        const tagClone = tag.cloneNode(true);
-        tagClone.onclick = function() { updateTags(tagClone); }; // Allow deselecting by re-clicking in the preview
-        previewTags.appendChild(tagClone);
-    }
-}
-
-function updatePreview() {
-    const title = document.getElementById('workTitle').value;
-    const content = document.getElementById('content').value;
-    document.getElementById('previewTitle').textContent = title;
-    document.getElementById('previewContent').textContent = content;
-}
-
-function addFeedbackPrompt() {
-    const feedbackPrompt = document.getElementById('feedbackRequest').value;
-    document.getElementById('previewFeedbackPrompt').textContent = feedbackPrompt;
-}
-
-// Function to handle deletion with confirmation
-function deleteWriting(element) {
-    if (confirm('Are you sure you want to delete this writing?')) {
-        element.parentNode.removeChild(element);
-    }
-}
-</script>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
 
 </head>
 <body>
@@ -300,7 +18,7 @@ function deleteWriting(element) {
         <a href="home.html">Home</a>
         <a href="#portfolio">Portfolio</a>
         <a href="submit.html">Submit Your Writing</a>
-        <a href="#peer-review">Peer Review</a>
+        <a href="feedback.html">Peer Review</a>
         <a href="#resources">Resources</a>
     </nav>
     <div class="search-icon">
@@ -309,6 +27,7 @@ function deleteWriting(element) {
 </header>
 
 <div class="container-flex">
+    <!-- Container: Submitted Writings [LEFT] -->
     <div class="submitted-writings">
         <h3>Submitted Writings</h3>
         <div id="writingList">
@@ -317,6 +36,7 @@ function deleteWriting(element) {
         </div>
     </div>
 
+    <!-- Container: Submit Writing for Feedback [MIDDLE] -->
     <div class="container">
         <h2>Submit Writing for Feedback</h2>
         <div class="form-control">
@@ -357,6 +77,7 @@ function deleteWriting(element) {
         </div>
     </div>
 
+    <!-- Container:Preview [RIGHT] -->
     <div class="submission-preview">
         <h3>Submission Preview</h3>
         <p><strong>Title:</strong> <span id="previewTitle"></span></p>
@@ -374,6 +95,10 @@ function deleteWriting(element) {
         <button onclick="addTag()">Add Tag</button>
     </div>
 </div>
+
+<footer>
+    &copy; 2024 Pen to Paycheck. All rights reserved.
+</footer>
 
 </body>
 </html>

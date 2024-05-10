@@ -1,0 +1,270 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #4A90E2, #4A60E2);
+    border-radius: 50px;
+    padding: 10px 20px;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.search-icon {
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.feed-title {
+    font-size: 24px;
+    margin: 20px auto;
+    color: #333;
+    width: 800px;
+}
+
+.writing-feed {
+    max-width: 800px;
+    margin: auto;
+    overflow-y: auto;
+}
+
+.writing-item {
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.portfolio-item {
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #4A90E2, #4A60E2);
+    border-radius: 50px;
+    padding: 10px 20px;
+    color: white;
+    top: 0;
+    z-index: 1000;
+}
+
+
+
+.container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+h2, h3, label.heading {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.button {
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.button:hover {
+    background: #0056b3;
+}
+input[type=text], textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.tag {
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    /* display: inline-block; */
+    border-radius: 999px;
+    color: white;
+    margin-bottom: 10px;
+}
+.tag:hover {
+    opacity: 0.9;
+}
+.form-control {
+    margin-bottom: 10px;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+.plus-sign {
+    display: inline-block;
+    background: linear-gradient(to right, cyan, lightgreen);
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 999px;
+    color: white;
+}
+
+.delete-sign {
+    /* display: inline-block; */
+    background: linear-gradient(to right, rgb(231, 137, 137), red);
+    padding: 5px 11px;
+    margin-right: 5px;
+    cursor: pointer;
+    border-radius: 999px;
+    color: white;
+    float: right; /* Align delete sign to the right */
+}
+
+.container-flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submission-preview, .submitted-writings {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 30%;
+}
+
+/* Additional styles for modal windows */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Styles for dynamically updating the content */
+.dynamic-content {
+    margin-bottom: 10px;
+}
+/* Gradients for tags */
+.poem { background: linear-gradient(to right, #8e9eab, #eef2f3); }
+.essay { background: linear-gradient(to right, #89f7fe, #66a6ff); }
+.journalism { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
+.fiction { background: linear-gradient(to right, #cfd9df, #e2ebf0); }
+.non-fiction { background: linear-gradient(to right, #5d9fff, #b8d3fe); }
+.grammar { background: linear-gradient(to right, #ffecd2, #fcb69f); }
+.pacing { background: linear-gradient(to right, #ff9a9e, #fad0c4); }
+.character { background: linear-gradient(to right, #ff758c, #ff7eb3); }
+.plot { background: linear-gradient(to right, #fad0c4, #ffd1ff); }
+.syntax { background: linear-gradient(to right, #f6d365, #fda085); }
+
+.tag.selected {
+    border: 2px solid red;
+}
+
+.new-tag {
+    margin-top: 10px; 
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.poem-structure {
+    font-family: 'Roboto', sans-serif; /* Modern sans-serif font */
+    font-size: 18px;
+    /* text-align: center; */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px #0000001a;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #E6E6E6; /* Light silver color for the font */
+    background: linear-gradient(to right, #0F2027, #203A43, #2C5364); /* Gradient from deep space blue to cosmic purple */
+}
