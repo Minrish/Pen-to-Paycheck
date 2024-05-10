@@ -305,3 +305,18 @@ input[type=text], textarea, select {
     background-color: #f8f8f8;
     border: 2px solid #ccc; /* Default border color, will be overridden by JS */
 }
+
+.user-button {
+    padding: 10px 20px;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.user-selection-container {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+}

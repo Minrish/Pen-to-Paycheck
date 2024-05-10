@@ -74,66 +74,53 @@ function deleteWriting(element) {
 }
 
 /////////////////////////////////////////////// FEEDBACK MECHANISM ///////////////////////////////////////////////
-function checkSelection(event) {
-    const selection = window.getSelection();
-    if (!selection.isCollapsed) {
-        const range = selection.getRangeAt(0);
-        const rect = range.getBoundingClientRect();
-        showCommentBox(rect.top + window.scrollY, rect.left, range);
-    }
+let activeUserColor = 'red'; // Default to the first user's color
+
+function setActiveUserColor(color) {
+    activeUserColor = color;
+}
+
+function triggerCommentBox(element) {
+    const text = element.textContent;
+    const rect = element.getBoundingClientRect();
+
+    showCommentBox(rect.bottom + window.scrollY, rect.left, text);
 }
 
 function addComment() {
     const commentBox = document.getElementById('commentBox');
     const commentText = document.getElementById('commentInput').value;
-    const selection = window.getSelection();
-    if (!commentText.trim() || selection.rangeCount === 0) return;
-
-    const range = selection.getRangeAt(0);
-    // Create a span to change the text color and apply highlighting
-    const span = document.createElement('span');
-    span.className = 'highlighted-text';
-    span.style.color = getNextHighlightColor();  // This function will cycle through predefined colors
-    span.textContent = selection.toString();
+    const lineText = document.getElementById('commentText').value;
+    if (!commentText.trim()) return;
 
     const comment = document.createElement('div');
     comment.className = 'comment';
-    comment.textContent = commentText;
-    comment.style.borderLeft = `4px solid ${span.style.color}`;  // Matching the text color to the comment border
+    comment.textContent = commentText + " (on line: '" + lineText + "')";
+    comment.style.borderLeft = `4px solid ${activeUserColor}`;
 
-    range.deleteContents();
-    range.insertNode(span);
     document.getElementById('commentsDisplay').appendChild(comment);
-
-    commentBox.remove();  // Remove the comment box after adding
-    selection.removeAllRanges(); // Clear selection
+    commentBox.style.display = 'none'; // Hide the comment box after adding
 }
 
-function getNextHighlightColor() {
-    const colors = ['red', 'green', 'blue', 'orange', 'purple']; // Example colors
-    return colors[Math.floor(Math.random() * colors.length)]; // Randomly pick a color
+function showCommentBox(top, left, text) {
+    const commentBox = document.getElementById('commentBox') || createCommentBox();
+    commentBox.style.top = top + 'px';
+    commentBox.style.left = left + 'px';
+    document.getElementById('commentText').value = text;
+    document.getElementById('commentInput').value = '';
+    commentBox.style.display = 'block';
 }
 
-function showCommentBox(top, left, range) {
+function createCommentBox() {
     const commentBox = document.createElement('div');
     commentBox.id = 'commentBox';
     commentBox.className = 'comment-box';
     commentBox.style.position = 'absolute';
-    commentBox.style.top = top + 'px';
-    commentBox.style.left = left + 'px';
     commentBox.innerHTML = `
+        <input type="hidden" id="commentText">
         <textarea id='commentInput' rows='4' placeholder='Enter your comment'></textarea>
         <button onclick='addComment()'>Add Comment</button>
     `;
     document.body.appendChild(commentBox);
-}
-
-function toggleComments() {
-    const comments = document.querySelectorAll('.highlighted-text, .comment');
-    comments.forEach(comment => {
-        comment.style.display = (comment.style.display === 'none') ? '' : 'none';
-    });
-
-    const toggleBtn = document.getElementById('toggleCommentsBtn');
-    toggleBtn.textContent = (toggleBtn.textContent === 'Hide Comments') ? 'Show Comments' : 'Hide Comments';
+    return commentBox;
 }
