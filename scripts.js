@@ -74,10 +74,6 @@ function deleteWriting(element) {
 }
 
 /////////////////////////////////////////////// FEEDBACK MECHANISM ///////////////////////////////////////////////
-// Define a list of colors for highlights
-const highlightColors = ['yellow', 'lightgreen', 'lightblue', 'pink', 'lightcoral'];
-let colorIndex = 0;
-
 function checkSelection(event) {
     const selection = window.getSelection();
     if (!selection.isCollapsed) {
@@ -94,19 +90,16 @@ function addComment() {
     if (!commentText.trim() || selection.rangeCount === 0) return;
 
     const range = selection.getRangeAt(0);
+    // Create a span to change the text color and apply highlighting
     const span = document.createElement('span');
-    span.className = 'highlight';
+    span.className = 'highlighted-text';
+    span.style.color = getNextHighlightColor();  // This function will cycle through predefined colors
     span.textContent = selection.toString();
-
-    // Assign a color from the list, cycling through them
-    const color = highlightColors[colorIndex % highlightColors.length];
-    span.style.backgroundColor = color;  // Assign the highlight color
-    colorIndex++;  // Move to the next color
 
     const comment = document.createElement('div');
     comment.className = 'comment';
     comment.textContent = commentText;
-    comment.style.borderColor = color;  // Use the same color for the comment border
+    comment.style.borderLeft = `4px solid ${span.style.color}`;  // Matching the text color to the comment border
 
     range.deleteContents();
     range.insertNode(span);
@@ -114,6 +107,11 @@ function addComment() {
 
     commentBox.remove();  // Remove the comment box after adding
     selection.removeAllRanges(); // Clear selection
+}
+
+function getNextHighlightColor() {
+    const colors = ['red', 'green', 'blue', 'orange', 'purple']; // Example colors
+    return colors[Math.floor(Math.random() * colors.length)]; // Randomly pick a color
 }
 
 function showCommentBox(top, left, range) {
@@ -131,12 +129,11 @@ function showCommentBox(top, left, range) {
 }
 
 function toggleComments() {
-    const comments = document.querySelectorAll('.highlight, .comment');
+    const comments = document.querySelectorAll('.highlighted-text, .comment');
     comments.forEach(comment => {
         comment.style.display = (comment.style.display === 'none') ? '' : 'none';
     });
 
-    // Update button text to indicate current state
     const toggleBtn = document.getElementById('toggleCommentsBtn');
     toggleBtn.textContent = (toggleBtn.textContent === 'Hide Comments') ? 'Show Comments' : 'Hide Comments';
 }
