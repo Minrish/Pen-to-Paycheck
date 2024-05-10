@@ -73,10 +73,14 @@ function deleteWriting(element) {
     }
 }
 
-// In-line highlight and comment
+/////////////////////////////////////////////// FEEDBACK MECHANISM ///////////////////////////////////////////////
+// Define a list of colors for highlights
+const highlightColors = ['yellow', 'lightgreen', 'lightblue', 'pink', 'lightcoral'];
+let colorIndex = 0;
+
 function checkSelection(event) {
     const selection = window.getSelection();
-    if (!selection.isCollapsed) { // Check if there is an actual selection
+    if (!selection.isCollapsed) {
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
         showCommentBox(rect.top + window.scrollY, rect.left, range);
@@ -93,27 +97,31 @@ function addComment() {
     const span = document.createElement('span');
     span.className = 'highlight';
     span.textContent = selection.toString();
-    span.style.backgroundColor = 'yellow';  // Ensuring the highlight color
+
+    // Assign a color from the list, cycling through them
+    const color = highlightColors[colorIndex % highlightColors.length];
+    span.style.backgroundColor = color;  // Assign the highlight color
+    colorIndex++;  // Move to the next color
 
     const comment = document.createElement('div');
     comment.className = 'comment';
     comment.textContent = commentText;
+    comment.style.borderColor = color;  // Use the same color for the comment border
 
     range.deleteContents();
     range.insertNode(span);
-    document.getElementById('commentsDisplay').appendChild(comment); // Append comment to a dedicated display area
+    document.getElementById('commentsDisplay').appendChild(comment);
 
     commentBox.remove();  // Remove the comment box after adding
     selection.removeAllRanges(); // Clear selection
 }
 
-// Function to show comment box
 function showCommentBox(top, left, range) {
     const commentBox = document.createElement('div');
     commentBox.id = 'commentBox';
     commentBox.className = 'comment-box';
     commentBox.style.position = 'absolute';
-    commentBox.style.top = (top + window.scrollY) + 'px';
+    commentBox.style.top = top + 'px';
     commentBox.style.left = left + 'px';
     commentBox.innerHTML = `
         <textarea id='commentInput' rows='4' placeholder='Enter your comment'></textarea>
@@ -125,14 +133,10 @@ function showCommentBox(top, left, range) {
 function toggleComments() {
     const comments = document.querySelectorAll('.highlight, .comment');
     comments.forEach(comment => {
-        if (comment.style.display === 'none') {
-            comment.style.display = '';
-        } else {
-            comment.style.display = 'none';
-        }
+        comment.style.display = (comment.style.display === 'none') ? '' : 'none';
     });
 
-    // Toggle button appearance
+    // Update button text to indicate current state
     const toggleBtn = document.getElementById('toggleCommentsBtn');
-    toggleBtn.textContent = toggleBtn.textContent.includes('Show') ? 'Hide Comments' : 'Show Comments';
+    toggleBtn.textContent = (toggleBtn.textContent === 'Hide Comments') ? 'Show Comments' : 'Hide Comments';
 }
