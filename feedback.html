@@ -24,18 +24,46 @@
 </header>
 
 <div class="container-flex">
-    <div class="container">
+    <div class="feedback-container">
         <div class="writing-feedback-container">
             <h3>Feedback on Writing</h3>
-            <button id="toggleCommentsBtn" onclick="toggleComments()" style="animation: fadeEffect 0.3s;">
-                Hide Comments
-            </button>
             <div class="container">
                 <div id="textContainer" class="writing-piece">
+                    <p><span onclick="triggerCommentBox(this)"><b>Infinity Affairs</b></span></p>
                     <p><span onclick="triggerCommentBox(this)">ToyStory Buzz Lightyear bullshit</span></p>
                     <p><span onclick="triggerCommentBox(this)">across this extraterrestrial universe!</span></p>
                     <p><span onclick="triggerCommentBox(this)">I have seen so much in my time</span></p>
-                    <!-- Additional lines wrapped similarly -->
+                    <p><span onclick="triggerCommentBox(this)">on this celestial soil, still the waters</span></p>
+                    <p><span onclick="triggerCommentBox(this)">flood the cities of space-time continuums,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">Biblical Noah rescues some three-eyed,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">four-winged creature from the wrath</span></p>
+                    <p><span onclick="triggerCommentBox(this)">of our merciless God. Cannonball crush</span></p>
+                    <p><span onclick="triggerCommentBox(this)">on a war-torn country, Hershey kiss</span></p>
+                    <p><span onclick="triggerCommentBox(this)">for corporate love affairs that human</span></p>
+                    <p><span onclick="triggerCommentBox(this)">beings (and Human Resources) will call</span></p>
+                    <p><span onclick="triggerCommentBox(this)">citation, censored *#%^#%@&</span></p>
+                    <p><span onclick="triggerCommentBox(this)">for the respect of the privacy and public</span></p>
+                    <p><span onclick="triggerCommentBox(this)">damnation welcomes the complicit. Moon</span></p>
+                    <p><span onclick="triggerCommentBox(this)">-y eyed boys practice violence on foreign</span></p>
+                    <p><span onclick="triggerCommentBox(this)">objects contrived from cobalt ruins</span></p>
+                    <p><span onclick="triggerCommentBox(this)">of conspiracy theorists’ UFO destinies,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">while the children are begging to be</span></p>
+                    <p><span onclick="triggerCommentBox(this)">believed. He razes villages before Empires,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">scatters Babel-tongued bodies across borders</span></p>
+                    <p><span onclick="triggerCommentBox(this)">before they are biopsied. Spoon politicians</span></p>
+                    <p><span onclick="triggerCommentBox(this)">into brine and they will emerge wrinklier</span></p>
+                    <p><span onclick="triggerCommentBox(this)">and with more bite. Save the blood,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">they almost resemble me and you.</span></p>
+                    <p><span onclick="triggerCommentBox(this)">The Kuiper Belt wears down the loops</span></p>
+                    <p><span onclick="triggerCommentBox(this)">of Neptune’s orbit, and the Sea</span></p>
+                    <p><span onclick="triggerCommentBox(this)">rejoices when the icy, frosted donut dissolves</span></p>
+                    <p><span onclick="triggerCommentBox(this)">in volumes that burn</span></p>
+                    <p><span onclick="triggerCommentBox(this)">through Venice and somewhere south</span></p>
+                    <p><span onclick="triggerCommentBox(this)">of the great Caviar-Corn Crevasse,</span></p>
+                    <p><span onclick="triggerCommentBox(this)">where Helios rests from that treacherous</span></p>
+                    <p><span onclick="triggerCommentBox(this)">8-minute journey and the dude before Galileo</span></p>
+                    <p><span onclick="triggerCommentBox(this)">rolls in his grave, along with the other fuckers</span></p>
+                    <p><span onclick="triggerCommentBox(this)">affluent with despair,</span></p>
                     <p><span onclick="triggerCommentBox(this)">on God’s Grand Earth.</span></p>
                 </div>
             </div>
@@ -43,11 +71,13 @@
     
         <div class="container">    
             <div class="tags-section">
-                <h3>Tags:</h3>
+                <h3>Writing Style Tags:</h3>
                 <span class="tag poem"onclick="updateTags(this)">Poem</span>
+                <span class="tag fiction"onclick="updateTags(this)">Fiction</span>
                 <h3>Feedback:</h3>
                 <span class="tag pacing" onclick="updateTags(this)">Pacing</span>
                 <span class="tag grammar" onclick="updateTags(this)">Grammar</span>
+                <span class="tag syntax" onclick="updateTags(this)">Syntax</span>
                 <!-- Add more tags as needed -->
             </div>
         </div>
@@ -71,10 +101,10 @@
     </div>
 
     <div class="user-selection-container">
-        <button class="user-button" style="background-color: red;" onclick="setActiveUserColor('red')">User 1</button>
-        <button class="user-button" style="background-color: green;" onclick="setActiveUserColor('green')">User 2</button>
-        <button class="user-button" style="background-color: blue;" onclick="setActiveUserColor('blue')">User 3</button>
-        <button class="user-button" style="background-color: purple;" onclick="setActiveUserColor('purple')">User 4</button>
+        <button class="user-button" style="background-color: rgb(205, 73, 73);" onclick="setActiveUserColor('red')">Elena Smith</button>
+        <button class="user-button" style="background-color: rgb(78, 164, 78);" onclick="setActiveUserColor('green')">Aarav Patel</button>
+        <button class="user-button" style="background-color: rgb(62, 62, 174);" onclick="setActiveUserColor('blue')">Liam Lee</button>
+        <button class="user-button" style="background-color: rgb(93, 41, 93);" onclick="setActiveUserColor('purple')">Yuna Kim</button>
     </div>
 
 </div>
